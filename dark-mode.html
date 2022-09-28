@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>No Network connect</title>
+    <style>   
+    body {
+        width: 100%;
+        min-height: 100vh;
+        display: relative;
+        margin: 0;
+        padding: 0;
+        background-color: #202123;
+    }
+
+    .wrapper {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        align-items: center;
+        justify-content: center;
+        -webkit-transform: translate(-50%, -50%);
+        -moz-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        -o-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        text-align: center;
+        width: 400px;
+        margin: 0 auto;
+        color: #CCCCCC;
+    }
+
+    @media(max-width: 768px) {
+        .wrapper {
+            width: auto;
+            margin: 0 auto;
+        }
+    }
+
+    .wrapper > img {
+        display: block;
+        margin-right: auto;
+    }
+
+    .wrapper > h1 {
+        font-family: arial;
+        font-weight: bold;
+        font-weight: 600;
+        font-size: 22px;
+        line-height: 140%;
+        text-align: left;
+        margin-top: 16px;
+    }
+    .wrapper > p {
+        font-family: arial;
+        font-weight: 300;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 140%;
+        text-align: left;
+    }
+
+    .wrapper > ul {
+        margin-top: 12px;
+    }
+
+    .wrapper > ul > li {
+        margin: 4px 0;
+        text-align: left;
+    }
+
+    </style>
+</head>
+<script>
+    var i18n = {
+        zh: {
+            title: "沒有網際網路連線",
+            subTitle: "建議做法：",
+            contentList: ["關閉飛航模式", "開啟行動數據或 Wi-Fi", "檢查所在位置的網路訊號"],
+        },
+        en: {
+            title: "No Internet Access",
+            subTitle: "To fix this, please try:",
+            contentList: ["Turning off airplane mode", "Turning on mobile data or reconnecting to Wi-Fi", "Checking the signal in your area"],
+        },
+        ja: {
+            title: "インターネットに接続されていません",
+            subTitle: "次をお試しください：",
+            contentList: ["機内モードをオフにする", "モバイルデータまたはWi-Fiを有効にする", "電波状況を確認する"],
+        },
+    };
+
+    window.addEventListener("message", function (event) {
+        var lang = "en";
+
+        if (event.source == window && event.data.direction && event.data.direction == "zh") {
+            console.log("lang: zh");
+            lang = "zh";
+        } else if (event.source == window && event.data.direction && event.data.direction == "ja") {
+            console.log("lang: ja");
+            lang = "ja";
+        } else {
+            lang = "en";
+        }
+
+        document.getElementById("title").innerHTML = i18n[lang].title;
+        document.getElementById("sub-title").innerHTML = i18n[lang].subTitle;
+        document.getElementById("content1").innerHTML = i18n[lang].contentList[0];
+        document.getElementById("content2").innerHTML = i18n[lang].contentList[1];
+        document.getElementById("content3").innerHTML = i18n[lang].contentList[2];
+    });
+</script>
+<body>
+    <div class="wrapper">
+        <img src="offline.png" alt="offline" width="60" height="60" />
+        <h1 id="title"></h1>
+        <p id="sub-title"></p>
+        <ul>
+            <li id="content1"></li>
+            <li id="content2"></li>
+            <li id="content3"></li>
+        </ul>
+    </div>
+</body>
+</html>
